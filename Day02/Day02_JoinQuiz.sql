@@ -5,70 +5,70 @@ select * from department;
 select * from job;
 select * from sal_grade;
 select * from national;
---1. ÁÖ¹Î¹øÈ£°¡ 1970³â´ë »ıÀÌ¸é¼­ ¼ºº°ÀÌ ¿©ÀÚÀÌ°í, ¼ºÀÌ Àü¾¾ÀÎ Á÷¿øµéÀÇ »ç¿ø¸í, ÁÖ¹Î¹øÈ£, ºÎ¼­¸í, Á÷±Ş¸íÀ» Á¶È¸ÇÏ½Ã¿À.
+--1. ì£¼ë¯¼ë²ˆí˜¸ê°€ 1970ë…„ëŒ€ ìƒì´ë©´ì„œ ì„±ë³„ì´ ì—¬ìì´ê³ , ì„±ì´ ì „ì”¨ì¸ ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ì£¼ë¯¼ë²ˆí˜¸, ë¶€ì„œëª…, ì§ê¸‰ëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
 
-select emp_name "»ç¿ø¸í", emp_no "ÁÖ¹Î¹øÈ£", dept_title "ºÎ¼­¸í", job_name "Á÷±Ş¸í"
+select emp_name "ì‚¬ì›ëª…", emp_no "ì£¼ë¯¼ë²ˆí˜¸", dept_title "ë¶€ì„œëª…", job_name "ì§ê¸‰ëª…"
  from employee join department on(dept_code = dept_id)
   join job using(job_code) where substr(emp_no,1,2) between 70 and 79
    and substr(emp_no,8,1) = '2';
 
---2. ÀÌ¸§¿¡ 'Çü'ÀÚ°¡ µé¾î°¡´Â Á÷¿øµéÀÇ »ç¹ø, »ç¿ø¸í, ºÎ¼­¸íÀ» Á¶È¸ÇÏ½Ã¿À.
-select emp_id "»ç¹ø", emp_name "»ç¿ø¸í", dept_title "ºÎ¼­¸í"
+--2. ì´ë¦„ì— 'í˜•'ìê°€ ë“¤ì–´ê°€ëŠ” ì§ì›ë“¤ì˜ ì‚¬ë²ˆ, ì‚¬ì›ëª…, ë¶€ì„œëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
+select emp_id "ì‚¬ë²ˆ", emp_name "ì‚¬ì›ëª…", dept_title "ë¶€ì„œëª…"
  from employee join department on(dept_code = dept_id)
-  where emp_name like '%Çü%';
+  where emp_name like '%í˜•%';
   
---3. ÇØ¿Ü¿µ¾÷ºÎ¿¡ ±Ù¹«ÇÏ´Â »ç¿ø¸í, Á÷±Ş¸í, ºÎ¼­ÄÚµå, ºÎ¼­¸íÀ» Á¶È¸ÇÏ½Ã¿À.
-select emp_name "»ç¿ø¸í", job_name "Á÷±Ş¸í", dept_code "ºÎ¼­ÄÚµå", dept_title "ºÎ¼­¸í"
+--3. í•´ì™¸ì˜ì—…ë¶€ì— ê·¼ë¬´í•˜ëŠ” ì‚¬ì›ëª…, ì§ê¸‰ëª…, ë¶€ì„œì½”ë“œ, ë¶€ì„œëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
+select emp_name "ì‚¬ì›ëª…", job_name "ì§ê¸‰ëª…", dept_code "ë¶€ì„œì½”ë“œ", dept_title "ë¶€ì„œëª…"
  from employee join job using(job_code) join department on(dept_code = dept_id)
-  where dept_title like '%ÇØ¿Ü¿µ¾÷%';
+  where dept_title like '%í•´ì™¸ì˜ì—…%';
   
---4. º¸³Ê½ºÆ÷ÀÎÆ®¸¦ ¹Ş´Â Á÷¿øµéÀÇ »ç¿ø¸í, º¸³Ê½ºÆ÷ÀÎÆ®, ºÎ¼­¸í, ±Ù¹«Áö¿ª¸íÀ» Á¶È¸ÇÏ½Ã¿À.
-select emp_name "»ç¿ø¸í", bonus "º¸³Ê½ºÆ÷ÀÎÆ®", dept_title "ºÎ¼­¸í", local_name "±Ù¹«Áö¿ª¸í"
+--4. ë³´ë„ˆìŠ¤í¬ì¸íŠ¸ë¥¼ ë°›ëŠ” ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ë³´ë„ˆìŠ¤í¬ì¸íŠ¸, ë¶€ì„œëª…, ê·¼ë¬´ì§€ì—­ëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
+select emp_name "ì‚¬ì›ëª…", bonus "ë³´ë„ˆìŠ¤í¬ì¸íŠ¸", dept_title "ë¶€ì„œëª…", local_name "ê·¼ë¬´ì§€ì—­ëª…"
  from employee join department on(dept_code = dept_id)
   join location on (location_id = local_code)
    where bonus is not null;
 
---5. ºÎ¼­ÄÚµå°¡ D2ÀÎ Á÷¿øµéÀÇ »ç¿ø¸í, Á÷±Ş¸í, ºÎ¼­¸í, ±Ù¹«Áö¿ª¸íÀ» Á¶È¸ÇÏ½Ã¿À.
-select emp_name "»ç¿ø¸í", job_name "Á÷±Ş¸í", dept_title "ºÎ¼­¸í", local_name "±Ù¹«Áö¿ª¸í"
+--5. ë¶€ì„œì½”ë“œê°€ D2ì¸ ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ì§ê¸‰ëª…, ë¶€ì„œëª…, ê·¼ë¬´ì§€ì—­ëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
+select emp_name "ì‚¬ì›ëª…", job_name "ì§ê¸‰ëª…", dept_title "ë¶€ì„œëª…", local_name "ê·¼ë¬´ì§€ì—­ëª…"
   from employee join job using(job_code)
    join department on(dept_code = dept_id)
     join location on (location_id = local_code)
      where dept_code = 'D2';
 
---6. ±Ş¿©µî±ŞÅ×ÀÌºíÀÇ ÃÖ´ë±Ş¿©(MIN_SAL)ÀÇ -20¸¸¿øº¸´Ù ¸¹ÀÌ ¹Ş´Â Á÷¿øµéÀÇ »ç¿ø¸í, Á÷±Ş¸í, ±Ş¿©, ÃÖ´ë±Ş¿©¸¦ Á¶È¸ÇÏ½Ã¿À.
--- (»ç¿øÅ×ÀÌºí°ú ±Ş¿©µî±ŞÅ×ÀÌºíÀ» SAL_LEVELÄÃ·³±âÁØÀ¸·Î Á¶ÀÎÇÒ °Í)
-select emp_name "»ç¿ø¸í", job_name "Á÷±Ş¸í", salary "±Ş¿©", min_sal "ÃÖ´ë±Ş¿©"
+--6. ê¸‰ì—¬ë“±ê¸‰í…Œì´ë¸”ì˜ ìµœëŒ€ê¸‰ì—¬(MIN_SAL)ì˜ -20ë§Œì›ë³´ë‹¤ ë§ì´ ë°›ëŠ” ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ì§ê¸‰ëª…, ê¸‰ì—¬, ìµœëŒ€ê¸‰ì—¬ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤.
+-- (ì‚¬ì›í…Œì´ë¸”ê³¼ ê¸‰ì—¬ë“±ê¸‰í…Œì´ë¸”ì„ SAL_LEVELì»¬ëŸ¼ê¸°ì¤€ìœ¼ë¡œ ì¡°ì¸í•  ê²ƒ)
+select emp_name "ì‚¬ì›ëª…", job_name "ì§ê¸‰ëª…", salary "ê¸‰ì—¬", min_sal "ìµœëŒ€ê¸‰ì—¬"
  from employee join job using(job_code)
   join sal_grade using(sal_level)
-   where salary > (min_sal - 200000); -- ¸Â´ÂÁö ¸ğ¸£°ÙÀ½..
+   where salary > (min_sal - 200000);
 
---7. ÇÑ±¹(KO)°ú ÀÏº»(JP)¿¡ ±Ù¹«ÇÏ´Â Á÷¿øµéÀÇ »ç¿ø¸í, ºÎ¼­¸í, Áö¿ª¸í, ±¹°¡¸íÀ» Á¶È¸ÇÏ½Ã¿À.
-select emp_name "»ç¿ø¸í", dept_title "ºÎ¼­¸í", local_name "Áö¿ª¸í", national_name "±¹°¡¸í"
+--7. í•œêµ­(KO)ê³¼ ì¼ë³¸(JP)ì— ê·¼ë¬´í•˜ëŠ” ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ë¶€ì„œëª…, ì§€ì—­ëª…, êµ­ê°€ëª…ì„ ì¡°íšŒí•˜ì‹œì˜¤.
+select emp_name "ì‚¬ì›ëª…", dept_title "ë¶€ì„œëª…", local_name "ì§€ì—­ëª…", national_name "êµ­ê°€ëª…"
  from employee join department on(dept_code = dept_id)
   join location on(location_id = local_code)
    join national using(national_code)
     where national_code in('KO','JP');
 
---8. °°Àº ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â Á÷¿øµéÀÇ »ç¿ø¸í, ºÎ¼­¸í, µ¿·áÀÌ¸§À» Á¶È¸ÇÏ½Ã¿À. (self join »ç¿ë)
-select e1.emp_name "»ç¿ø¸í", dept_title "ºÎ¼­¸í", e2.emp_name "µ¿·áÀÌ¸§"
+--8. ê°™ì€ ë¶€ì„œì— ê·¼ë¬´í•˜ëŠ” ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ë¶€ì„œëª…, ë™ë£Œì´ë¦„ì„ ì¡°íšŒí•˜ì‹œì˜¤. (self join ì‚¬ìš©)
+select e1.emp_name "ì‚¬ì›ëª…", dept_title "ë¶€ì„œëª…", e2.emp_name "ë™ë£Œì´ë¦„"
  from employee e1 join department on(dept_code = dept_id)
   join employee e2 on(e1.dept_code = e2.dept_code)
   where e1.emp_name != e2.emp_name;
 
---9. º¸³Ê½ºÆ÷ÀÎÆ®°¡ ¾ø´Â Á÷¿øµé Áß¿¡¼­ Á÷±ŞÀÌ Â÷Àå°ú »ç¿øÀÎ Á÷¿øµéÀÇ »ç¿ø¸í, Á÷±Ş¸í, ±Ş¿©¸¦ Á¶È¸ÇÏ½Ã¿À. ´Ü, join°ú IN »ç¿ëÇÒ °Í
-select emp_name "»ç¿ø¸í", job_name "Á÷±Ş¸í", salary "±Ş¿©"
+--9. ë³´ë„ˆìŠ¤í¬ì¸íŠ¸ê°€ ì—†ëŠ” ì§ì›ë“¤ ì¤‘ì—ì„œ ì§ê¸‰ì´ ì°¨ì¥ê³¼ ì‚¬ì›ì¸ ì§ì›ë“¤ì˜ ì‚¬ì›ëª…, ì§ê¸‰ëª…, ê¸‰ì—¬ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤. ë‹¨, joinê³¼ IN ì‚¬ìš©í•  ê²ƒ
+select emp_name "ì‚¬ì›ëª…", job_name "ì§ê¸‰ëª…", salary "ê¸‰ì—¬"
  from employee join job using(job_code)
-  where bonus is null and job_name in ('Â÷Àå', '»ç¿ø');
+  where bonus is null and job_name in ('ì°¨ì¥', 'ì‚¬ì›');
 
---10. ÀçÁ÷ÁßÀÎ Á÷¿ø°ú Åğ»çÇÑ Á÷¿øÀÇ ¼ö¸¦ Á¶È¸ÇÏ½Ã¿À.
-select decode(ent_yn, 'Y', 'Åğ»ç', 'N','ÀçÁ÷') "ÀçÁ÷¿©ºÎ", count(*) "ÀÎ¿ø¼ö"
+--10. ì¬ì§ì¤‘ì¸ ì§ì›ê³¼ í‡´ì‚¬í•œ ì§ì›ì˜ ìˆ˜ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤.
+select decode(ent_yn, 'Y', 'í‡´ì‚¬', 'N','ì¬ì§') "ì¬ì§ì—¬ë¶€", count(*) "ì¸ì›ìˆ˜"
  from employee group by ent_yn;
 
---11. °¢ »ç¿øµéÀÇ ÀÌ¸§,³ªÀÌ(ÇÑ±¹³ªÀÌ),ºÎ¼­¸í,Á÷Ã¥¸íÀ» Ãâ·ÂÇÏ¿©¶ó.
--- ºÎ¼­°¡ ¾øÀ¸¸é 'ºÎ¼­¾øÀ½' Ãâ·Â / ³ªÀÌ ³»¸²Â÷¼ø Á¤·Ä 
-select emp_name "ÀÌ¸§", 
-  extract(year from sysdate) - extract(year from to_date(substr(emp_no,1,2), 'RR')) +1 "³ªÀÌ", 
-   nvl(dept_title, 'ºÎ¼­¾øÀ½') "ºÎ¼­¸í", job_name "Á÷Ã¥¸í"
+--11. ê° ì‚¬ì›ë“¤ì˜ ì´ë¦„,ë‚˜ì´(í•œêµ­ë‚˜ì´),ë¶€ì„œëª…,ì§ì±…ëª…ì„ ì¶œë ¥í•˜ì—¬ë¼.
+-- ë¶€ì„œê°€ ì—†ìœ¼ë©´ 'ë¶€ì„œì—†ìŒ' ì¶œë ¥ / ë‚˜ì´ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬ 
+select emp_name "ì´ë¦„", 
+  extract(year from sysdate) - extract(year from to_date(substr(emp_no,1,2), 'RR')) +1 "ë‚˜ì´", 
+   nvl(dept_title, 'ë¶€ì„œì—†ìŒ') "ë¶€ì„œëª…", job_name "ì§ì±…ëª…"
    from employee left outer join department on(dept_code = dept_id)
     join job using(job_code)
      order by 2 desc;
