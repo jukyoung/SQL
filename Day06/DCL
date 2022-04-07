@@ -1,0 +1,47 @@
+/*
+   DCL (Data Control Language)
+   : 데이터 제어어
+   -> 데이터베이스에 관한 보안, 무결성, 복구 등 DBMS를 제어하기 위한 언어
+   -> grant, revoke / TCL(commit, rollback)
+*/
+/*
+  grant : 사용자 또는 role(resource, connect, dba(:데이터베이스 관리자 권한))에 대한 권한 부여
+  -> system/관리자 계정 접속 -> 신규 사용자 생성 -> grant 접속 권한 부여 -> 리소스 권한 부여
+*/
+
+create user test01 identified by test01;
+grant connect, resource to test01;
+-- 계정 바꿔서 테이블생성
+create table coffee(
+  name varchar2(50) primary key
+  , price number not null
+  , brand varchar2(100) not null
+);
+
+insert into coffee values('카페라떼', 3500, 'NESCAFE');
+
+select * from coffee;
+commit;
+-- test 계정으로 바꿔서 실행 (계정명.테이블 붙여도 실행 안됨)
+select * from coffee;
+
+-- system 계정에서 test01 계정한테 kh 계정이 가지고 있는 coffee테이블에 접근 권한 부여
+grant select on kh.coffee to test01;
+-- test 계정으로 돌아와서 조회해보면 가능함
+select * from kh.coffee;
+-- 한번 데이터를 넣어보면 오류 남 (권한이 없음)
+insert into kh.coffee values('바닐라떼', 6000, 'STARBUCKS');
+
+-- system 계정에서 test01 계정한테 kh 계정의 coffee 테이블에 대한 insert 권한 부여
+grant insert on kh.coffee to test01;
+-- test 계정으로 돌아와서 데이터를 넣어보면 넣어짐
+insert into kh.coffee values('바닐라떼', 6000, 'STARBUCKS');
+
+-- revoke -> 부여된 권한을 해제/회수하는 명령어
+-- system 계정
+revoke select, insert on kh.coffee from test01;
+
+select * from kh.coffee;
+insert into kh.coffee values('바닐라떼', 6000, 'STARBUCKS');
+
+select * from dba_role_privs where grantee = 'KH';
